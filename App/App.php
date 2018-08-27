@@ -4,11 +4,16 @@ class App {
 
     protected $env;
 
+    protected $theme;
+
     public function __construct($env = 'dev') {
-        $this->env = $env;
+        // Init asubit microframework app
         $this->init($this->env);
     }
 
+    /*
+     * Init asubit microframework app
+     */
     public function init($env) {
         switch ($env) {
             case 'dev':
