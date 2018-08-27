@@ -1,9 +1,9 @@
 <?php
 
-include('BaseController.php');
+include('App/Controller.php');
 
 // Instanciate BaseController
-$controller = new BaseController();
+$controller = new Controller();
 
 // Define template variables
 $controller->variables = [
