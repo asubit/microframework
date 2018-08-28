@@ -2,7 +2,7 @@
 
 include('App/Controller.php');
 
-// Instanciate BaseController
+// Instanciate Controller
 $controller = new Controller();
 
 // Define template variables
