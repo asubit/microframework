@@ -53,22 +53,16 @@ For this example we are going to create the route named `page` with URL `/page`.
     }
 }
 ```
-As you can see all app routes are define in a first level array with following structure : 
-```
-['the-route-name' => [
-  'path' => '/the-route-url',
-  'controller' => 'the-route-controller-file-path'
-]]
-```
+
 
 ### 2. Create a controller
 For this example we are going to create the file `Controller/Page.php`.
 ```
 <?php
-include('BaseController.php');
+include('App/Controller.php');
 
-// Instanciate BaseController
-$controller = new BaseController();
+// Instanciate Controller
+$controller = new Controller();
 
 // Define template variables
 $controller->variables = [
@@ -84,15 +78,39 @@ $controller->render('home');
 The `BaseController:render()` method is based on the controller name in lowercase for matching the corresponding view file in `View` directory.
 So for this example we are going to create the file `View/page.php`.
 ```
-<?php include('base_header.php'); ?>
-
 <h1><?php echo $this->variables['title']; ?></h1>
 
 <div class="content">
     <?php echo $this->variables['content']; ?> 
 </div>
-
-<?php include('base_footer.php'); ?>
 ```
 
-You can include any template you want for create any laout you need.
+You can include any template you want for create any layout you need.
+
+## Theming
+
+Do you need to apply a common display theme to all your pages?
+Asubit microframework allows you to do that.
+
+### Theme structure
+
+All themes are located in `View` directory.
+
+A theme is defined with at least this following structure:
+```
+theme-name
+  ├ theme.json
+  ├ header.php
+  ├ footer.php
+```
+
+### theme.json
+```
+{
+    "name": "Bootstrap",    # Theme name, purely informative
+    "header": "header.php", # File include before your view
+    "footer": "footer.php"  # File include after your view
+}
+```
+
+Asubit microframework provide a defult theme based on Bootstrap CDN.
