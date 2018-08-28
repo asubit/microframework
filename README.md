@@ -92,24 +92,33 @@ You can include any template you want for create any layout you need.
 Do you need to apply a common display theme to all your pages?
 Asubit microframework allows you to do that.
 
-### Theme structure
+### Create a theme
 
 All themes are located in `View` directory.
 
 A theme is defined with at least this following structure:
 ```
-theme-name
+theme-custom
   ├ theme.json
   ├ header.php
   ├ footer.php
 ```
 
-### theme.json
+#### theme.json
 ```
 {
-    "name": "Bootstrap",    # Theme name, purely informative
+    "name": "Custom theme", # Theme name, purely informative
     "header": "header.php", # File include before your view
     "footer": "footer.php"  # File include after your view
+}
+```
+
+### Use a theme
+
+To use a theme you have to specify the theme directory name in `App/confog/parameters.json` with key `theme` :
+```
+{
+    "theme": "theme-custom"
 }
 ```
 
