@@ -46,10 +46,22 @@ class App {
             padding: 0 1em;
         }
         </style>';
+        $color = 'black';
+        switch(http_response_code()) {
+            case '200':
+                $color = '#2ed15e';
+                break;
+            case '404':
+                $color = '#ff9b19';
+                break;
+            case '500':
+                $color = '#ff0000';
+                break;
+        }
         $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         $content = '<div>' . $env . '</div>';
-        $content .= '<div>' . http_response_code() . '</div>';
-        $content .= '<div>' . $url . '</div>';
+        $content .= '<div>' . $_SERVER['REQUEST_METHOD'] . ' ' . $url . '</div>';
+        $content .= '<div style="background-color: '.$color.'">HTTP ' . http_response_code() . '</div>';
         $debugBar = $style . '<div class="debugbar">' . $content . '</div>';
         return $debugBar;
     }

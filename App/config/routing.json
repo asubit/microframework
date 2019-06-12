@@ -1,10 +1,10 @@
 {
     "/": {
         "path": "/",
-        "controller": "Controller/Home.php"
+        "controller": "Controller/DefaultController.php"
     }, 
     "page": {
         "path": "/page",
-        "controller": "Controller/Page.php"
+        "controller": "Controller/PageController.php"
     }
 }

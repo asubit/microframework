@@ -25,7 +25,7 @@ class Routing {
         {
             $path = substr($path, 0, $position);
         }
-        return $path;
+        return $path ? $path : '/';
     }
 
     /**
@@ -38,9 +38,7 @@ class Routing {
         if (isset($routes->$path->controller)) {
             include $routes->$path->controller;
         } else {
-            http_response_code(404);
-            include 'views/404.php';
-            die();
+            include 'Controller/ErrorController.php';
         }
     }
 }

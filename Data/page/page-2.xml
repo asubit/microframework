@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<page>
+  <title>Page 2</title>
+  <content><![CDATA[
+    <h2>Sed ut perspiciatis</h2><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p><p>Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p><p>Return to <a href="/">home</a> or see <a href="/page?id=1">page 1</a>.</p>
+    ]]></content>
+</page>
