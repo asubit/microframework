@@ -18,25 +18,8 @@ $app = new App('dev');
 // init routing
 $routing = new Routing();
 $routing->go();
-```
 
-## How simple?
-
-The routing system just do one thing :
-
-```
-public function go() {
-        $routes = json_decode(file_get_contents(__DIR__ . '/config/routing.json'));
-        $path = $this->getPath();
-        // Route/Controller matching system
-        if (isset($routes->$path->controller)) {
-            include $routes->$path->controller;
-        } else {
-            http_response_code(404);
-            include 'views/404.php';
-            die();
-        }
-    }
+$app->init();
 ```
 
 ## How use it?
@@ -53,7 +36,6 @@ For this example we are going to create the route named `page` with URL `/page`.
     }
 }
 ```
-
 
 ### 2. Create a controller
 For this example we are going to create the file `Controller/Page.php`.

@@ -1,5 +1,8 @@
 {
     "name": "Bootstrap",
+    "layouts": {
+        "default": {"header": "header.php", "footer": "footer.php"}
+    },
     "header": "header.php",
     "footer": "footer.php"
 }
