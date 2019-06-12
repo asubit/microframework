@@ -3,7 +3,11 @@
         "path": "/",
         "controller": "Controller/DefaultController.php"
     }, 
-    "page": {
+    "hello": {
+        "path": "/hello",
+        "controller": "Controller/HelloController.php"
+    },
+   "page": {
         "path": "/page",
         "controller": "Controller/PageController.php"
     }

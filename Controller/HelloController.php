@@ -1,5 +1,4 @@
 <?php
-
 include('App/Controller.php');
 
 // Instanciate Controller
@@ -7,9 +6,9 @@ $controller = new Controller();
 
 // Define template variables
 $controller->variables = [
-	'date' => new \DateTime(),
-	'pages' => [1,2],
+    'foo' => 'Hello world',
+    'bar' => '<p>Great too see you here!</p>'
 ];
 
 // Render template
-$controller->render('home');
+$controller->render('hello');

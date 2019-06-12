@@ -19,7 +19,7 @@ $app = new App('dev');
 $routing = new Routing();
 $routing->go();
 
-$app->init();
+$app->run();
 ```
 
 ## How use it?
@@ -27,18 +27,18 @@ $app->init();
 Following steps show you how to create a new page with Route/Controller/View system.
 
 ### 1. Create a route in routing.json
-For this example we are going to create the route named `page` with URL `/page`.
+For this example we are going to create the route named `hello` with URL `/hello`.
 ```
 {
-    "page": {
-        "path": "/page",
-        "controller": "Controller/Page.php"
+    "hello": {
+        "path": "/hello",
+        "controller": "Controller/HelloController.php"
     }
 }
 ```
 
 ### 2. Create a controller
-For this example we are going to create the file `Controller/Page.php`.
+For this example we are going to create the file `Controller/HelloController.php`.
 ```
 <?php
 include('App/Controller.php');
@@ -48,26 +48,29 @@ $controller = new Controller();
 
 // Define template variables
 $controller->variables = [
-    'title' => 'Hello world',
-    'content' => '<p>Lorem ipsum dolor sit amet.</p>'
+    'foo' => 'Hello world',
+    'bar' => '<p>Great too see you here!</p>'
 ];
 
 // Render template
-$controller->render('home');
+$controller->render('hello');
 ```
 
 ### 3. Create a view
-The `BaseController:render()` method is based on the controller name in lowercase for matching the corresponding view file in `View` directory.
-So for this example we are going to create the file `View/page.php`.
+The `Controller:render()` method is based on the controller name in lowercase for matching the corresponding view file in `View` directory.
+So for this example we are going to create the file `View/hello.php`.
 ```
-<h1><?php echo $this->variables['title']; ?></h1>
+<h1><?php echo $this->variables['foo']; ?></h1>
 
 <div class="content">
-    <?php echo $this->variables['content']; ?> 
+    <?php echo $this->variables['bar']; ?> 
 </div>
 ```
 
 You can include any template you want for create any layout you need.
+
+## Data
+By default your can store data in XML in `Data/` folder.
 
 ## Theming
 

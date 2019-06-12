@@ -14,7 +14,7 @@ class App {
     /*
      * Init asubit microframework app
      */
-    public function init() {
+    public function run() {
         switch ($this->env) {
             case 'dev':
                 error_reporting(E_ALL);
