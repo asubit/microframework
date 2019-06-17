@@ -1,0 +1,6 @@
+{
+    "admin": {
+        "path": "/admin",
+        "controller": "lib/cms/Controller/AdminController.php"
+    }
+}
