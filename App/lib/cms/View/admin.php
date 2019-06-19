@@ -1,3 +1,1 @@
-<?php
-echo 'ADMIN';
-?>
+<h1>ADMIN</h1>

@@ -6,4 +6,4 @@ include('App/Controller.php');
 $controller = new Controller();
 
 // Render template
-$controller->render('admin');
+$controller->render('admin', 'cms');

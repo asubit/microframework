@@ -1,11 +1,27 @@
 <?php
 
+/**
+ * Asubit MicroFramework App
+ * 
+ * @author Antoine Subit
+ * @copyright Antoine Subit © 2019
+ * @license CeCILL-B [http://www.cecill.info/licences/Licence_CeCILL-B_V1-en.html]
+ */
 class App {
 
+    /**
+     * @var string $env
+     */
     protected $env;
 
+    /**
+     * @var Theme $theme
+     */
     protected $theme;
 
+    /**
+     * @var array $routes
+     */
     protected $routes;
 
     /**
@@ -13,18 +29,22 @@ class App {
      * @param string $env
      */
     public function __construct($env = 'dev') {
-        // Init asubit microframework app
+        // app environment definition
         $this->env = $env;
+        // app routes definition
         $this->routes = [];
     }
 
     /**
-     * Init asubit microframework app
-     * and load enabled libraries
+     * Loads the components specific to each environment
+     * Loads the libraries from App/lib
+     * Define all routes of the application and libraries
      * @param array $libs
      */
     public function run($libs = null) {
-        // Apply debug
+        // Session init
+        session_start();
+        // load env components
         switch ($this->env) {
             case 'dev':
                 $this->enableDebug();
@@ -32,16 +52,19 @@ class App {
             default:
                 break;
         }
-        // Load App routes
+        // load app routes
         $routes = json_decode(file_get_contents(__DIR__ . '/config/routing.json'), true);
-        // Load libraries
+        // load libraries
         if ($libs) {
             foreach ($libs as $id => $lib) {
+                // execute library main loader file
                 $this->load($lib);
+                // load library routes
                 $libRoutes = json_decode(file_get_contents(__DIR__ .'/lib/'.$lib.'/routing.json'), true);
                 $routes = array_merge($routes, $libRoutes);
             }
         }
+        // all app & Lib routes format
         $this->routes = json_encode($routes);
     }
 
@@ -51,11 +74,11 @@ class App {
      */
     public function load($lib) {
         try {
-            // Is there a lib ?
+            // is there a lib ?
             if ($lib) {
-                // Is it installed ?
+                // is it installed ?
                 if ($this->isLibInstalled($lib)) {
-                    // Let's load it !
+                    // let's load it !
                     include(__DIR__ .'/lib/'.$lib.'/'.$lib.'.php');
                 } else {
                     throw new Exception('Library ' . $lib . ' is not installed.');
@@ -69,16 +92,19 @@ class App {
     }
 
     /**
-     * Execute controller for the current URL
-     * based on all routing.json files in App/lib
+     * Execute Controller for the current URL
      */
     public function route() {
+        // app routes
         $routes = json_decode($this->routes);
+        // current path
         $path = $this->getPath();
-
+        // check routes path controller match
         if (isset($routes->$path->controller)) {
+            // execute controller
             include $routes->$path->controller;
         } else {
+            // error display
             include 'Controller/ErrorController.php';
         }
     }
@@ -104,9 +130,18 @@ class App {
 
     /**
      * Check if a library is installed
+     * @param string $lib
      */
     public function isLibInstalled($lib) {
-        return in_array($lib, $this->getLibs());
+        $isLibInstalled = false;
+        // is the lib name match one on the App/lib folder name
+        if (in_array($lib, $this->getLibs())) {
+            // is the lib main file exist
+            if(file_exists(__DIR__ .'/lib/'.$lib.'/'.$lib.'.php')) {
+                $isLibInstalled = true;
+            }
+        }
+        return (bool)$isLibInstalled;
     }
 
     /**
@@ -129,7 +164,7 @@ class App {
      * HTML added if env is dev
      */
     public function debugBar() {
-        // Internal style sheet
+        // internal style sheet
         $style = '<style>
         .debugbar{
             position:fixed;
@@ -161,9 +196,9 @@ class App {
                 $color = '#ff0000';
                 break;
         }
-        // Current URL
+        // current URL
         $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-        // Construct HTML
+        // construct HTML
         $html = $style;
         $html .= '<div class="debugbar">';
         $html .= '<div>' . $this->env . '</div>';

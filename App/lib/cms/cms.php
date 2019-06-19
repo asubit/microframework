@@ -1,3 +1,3 @@
 <?php
-echo 'CMS loaded !';
+$_SESSION['lib']['cms'] = true;
 ?>
