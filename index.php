@@ -1,13 +1,15 @@
 <?php
 
 include('App/App.php');
-include('App/Routing.php');
 
 // Init the Asubit Microframework App
 $app = new App('dev');
-// Instanciate routing
-$routing = new Routing();
-// Match the current route URL and call associated controller class
-$routing->go();
 
-$app->run();
+// Enable libraries
+$libraries = ['cms'];
+
+// Load app et libraries
+$app->run($libraries);
+
+// Match the current URL and call associated Controller class
+$app->route();
