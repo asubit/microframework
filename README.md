@@ -8,18 +8,34 @@ Simple minimalist PHP micro framework that provides you anything you need :
 
 Asubit Microframework allow you to do everything you want without any constraints.
 
+## Install
+
+No Composer needed, just clone this repository.
+```
+git clone git@github.com:asubit/microframework.git
+```
+
+Or without Git :
+```
+wget https://github.com/asubit/microframework/archive/master.zip -P ~/
+unzip ~/microframework-master.zip -d /home/gfi/microframework
+```
+
 ## How minimalist?
 
 The index.php file just do two things : 
 ```
-// init app
+// Init the Asubit Microframework App
 $app = new App('dev');
 
-// init routing
-$routing = new Routing();
-$routing->go();
+// Enable libraries
+$libraries = ['cms'];
 
-$app->run();
+// Load app et libraries
+$app->run($libraries);
+
+// Match the current URL and call associated Controller class
+$app->route();
 ```
 
 ## How use it?
